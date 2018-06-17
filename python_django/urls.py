@@ -27,9 +27,8 @@ urlpatterns = [
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^categories/(?P<pk>\d+)/$', views.category_threads, name='category_threads'),
     url(r'^categories/(?P<pk>\d+)/new/$', views.new_thread, name='new_thread'),
+    url(r'^categories/(?P<pk>\d+)/threads/(?P<thread_pk>\d+)/$', views.thread_posts, name='thread_posts'),
+    url(r'^categories/(?P<pk>\d+)/threads/(?P<thread_pk>\d+)/reply/$', views.reply_thread, name='reply_thread'),
     url(r'^admin/', admin.site.urls),
 
 ]
-
-
-

@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 
-from forum.forms import NewThreadForm
+from forum.forms import NewThreadForm, PostForm
 from forum.models import Category, Forum_Thread, Post
 
 
@@ -17,46 +18,54 @@ def home(request):
     return render(request, 'home.html', {'categories': categories})
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
-
-
 def category_threads(request, pk):
     category = get_object_or_404(Category, pk=pk)
     return render(request, 'threads.html', {'category': category})
 
 
+@login_required
 def new_thread(request, pk):
     category = get_object_or_404(Category, pk=pk)
-    user = User.objects.first()  # TODO: get the currently logged in user
 
     if request.method == 'POST':
         form = NewThreadForm(request.POST)
         if form.is_valid():
             thread = form.save(commit=False)
             thread.category = category
-            thread.owner = user
+            thread.owner = request.user
             thread.save()
 
-            post = Post.objects.create(
+            Post.objects.create(
                 content=form.cleaned_data.get('message'),
-                thread=thread,
-                owner=user
+                forum_thread=thread,
+                owner=request.user,
             )
-            return redirect('category_threads', pk=category.pk)  # TODO: redirect to the created topic page
+            return redirect('thread_posts', pk=pk, thread_pk=thread.pk)
 
     else:
         form = NewThreadForm()
 
     return render(request, 'new_thread.html', {'category': category, 'form': form})
+
+
+def thread_posts(request, pk, thread_pk):
+    thread = get_object_or_404(Forum_Thread, category__pk=pk, pk=thread_pk)
+    thread.views += 1
+    thread.save()
+    return render(request, 'thread_posts.html', {'thread': thread})
+
+
+@login_required
+def reply_thread(request, pk, thread_pk):
+    thread = get_object_or_404(Forum_Thread, category__pk=pk, pk=thread_pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.forum_thread = thread
+            post.owner = request.user
+            post.save()
+            return redirect('thread_posts', pk=pk, thread_pk=thread_pk)
+    else:
+        form = PostForm()
+    return render(request, 'reply_thread.html', {'thread': thread, 'form': form})

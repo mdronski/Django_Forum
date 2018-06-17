@@ -1,5 +1,5 @@
 from django import forms
-from .models import Forum_Thread
+from .models import Forum_Thread, Post
 
 
 class NewThreadForm(forms.ModelForm):
@@ -16,3 +16,17 @@ class NewThreadForm(forms.ModelForm):
     class Meta:
         model = Forum_Thread
         fields = ['thread_name', 'message']
+
+
+class PostForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 5,
+                   'placeholder': 'Type post content here'
+                   }
+        )
+    )
+
+    class Meta:
+        model = Post
+        fields = ['content', ]

@@ -11,16 +11,12 @@
 
 {% block content %}
 
-    <div class="mb-4">
-        <a href="{% url 'new_thread' category.pk %}" class="btn btn-primary">New Thread</a>
-    </div>
-
     <table class="table">
         <thead class="thead-inverse">
         <tr>
             <th>Subject</th>
             <th>Owner</th>
-            <th>Replies</th>
+            <th>Posts</th>
             <th>Views</th>
             <th>Last Update</th>
         </tr>
@@ -28,13 +24,18 @@
         <tbody>
         {% for thread in category.threads.all %}
             <tr>
-                <td>{{ thread.thread_name }}</td>
+                <td><a href="{% url 'thread_posts' category.pk thread.pk %}">{{ thread.thread_name }}</a></td>
                 <td>{{ thread.owner.username }}</td>
-                <td>0</td>
-                <td>0</td>
+                <td>{{ thread.posts.count }}</td>
+                <td>{{ thread.views }}</td>
                 <td>{{ thread.update_date }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="mb-4">
+        <a href="{% url 'new_thread' category.pk %}" class="btn btn-primary">New Thread</a>
+    </div>
+
 {% endblock %}
