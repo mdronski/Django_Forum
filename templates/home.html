@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item active">Categories</li>
+    <li class="breadcrumb-item active">Home</li>
 {% endblock %}
 
 {% block content %}
     <table class="table">
-        <thead class="thead-inverse">
+        <thead class="thead-light">
         <tr>
             <th>Category</th>
             <th>Threads</th>
@@ -25,7 +25,7 @@
                     {{ category.threads.count }}
                 </td>
                 <td class="align-middle">
-                    {{ category.get_posts_count }}
+                    {{ category.get_post_count }}
                 </td>
                 <td class="align-middle">
                     {% with post=category.get_last_post %}

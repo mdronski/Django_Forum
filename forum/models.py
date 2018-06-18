@@ -12,7 +12,7 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
-    def get_thread_count(self):
+    def get_post_count(self):
         return Post.objects.filter(forum_thread__category=self).count()
 
     def get_last_post(self):

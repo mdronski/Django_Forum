@@ -5,7 +5,7 @@
 {% block title %}{{ thread.subject }}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
     <li class="breadcrumb-item"><a
             href="{% url 'category_threads' thread.category.pk %}">{{ thread.category.category_name }}</a></li>
     <li class="breadcrumb-item active">{{ thread.thread_name }}</li>

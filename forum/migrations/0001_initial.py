@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('thread_name', models.CharField(max_length=256)),
                 ('update_date', models.DateTimeField(auto_now_add=True)),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='forum.Category')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='topics', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='threads', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(

@@ -1,4 +1,102 @@
+body {
+    background-image: url(../img/myBg.jpg);
+}
+
 .navbar-brand {
     font-family: 'Bangers', cursive;
+}
 
+.table .thead-light th {
+    color: #dddcd9;
+    background-color: #383633;
+    border-color: #091933
+}
+
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #c6c6c4
+}
+
+.table-bordered {
+    border: 1px solid #0d2b5b
+}
+
+.btn-primary {
+    color: #330c05;
+    background-color: #ea492c;
+    border-color: #ea492c
+}
+
+.btn-primary:hover {
+    color: #e8beb7;
+    background-color: #721201;
+    border-color: #721201
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #e8beb7;
+    background-color: #721201;
+    border-color: #721201
+}
+
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    color: #f7ecea;
+    background-color:#5b0e00;
+    border-color: #330700
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    box-shadow: 0 0 0 .2rem rgba(229, 63, 45, 0.5)
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(229, 63, 45, 0.5)
+}
+
+
+.btn-outline-secondary {
+    color: #000000;
+    background: #b2b2b0 none;
+    border-color: #6c757d
+}
+
+.breadcrumb {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #383633;
+    border-radius: .25rem
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #dddcd9;
+    content: " -> "
+}
+
+.breadcrumb-item.active {
+    color: #dddcd9
+}
+
+a {
+    color: #e51b09;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects
+}
+
+a:hover {
+    color: #bc0104;
+    text-decoration: underline
 }
