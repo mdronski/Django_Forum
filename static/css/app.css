@@ -12,7 +12,6 @@ body {
     border-color: #091933
 }
 
-
 .table {
     width: 100%;
     max-width: 100%;
@@ -42,10 +41,9 @@ body {
     border-color: #721201
 }
 
-
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
     color: #f7ecea;
-    background-color:#5b0e00;
+    background-color: #5b0e00;
     border-color: #330700
 }
 
@@ -56,7 +54,6 @@ body {
 .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 .2rem rgba(229, 63, 45, 0.5)
 }
-
 
 .btn-outline-secondary {
     color: #000000;
@@ -73,7 +70,7 @@ body {
     padding: .75rem 1rem;
     margin-bottom: 1rem;
     list-style: none;
-    background-color: #383633;
+    background-color: #373C42;
     border-radius: .25rem
 }
 
@@ -99,4 +96,21 @@ a {
 a:hover {
     color: #bc0104;
     text-decoration: underline
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 5px solid rgba(0, 0, 0, .20);
+    border-radius: .25rem
 }

@@ -1,49 +1,73 @@
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item active">Home</li>
+    <li class="breadcrumb-item active bg-dark">Home</li>
 {% endblock %}
 
 {% block content %}
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th>Category</th>
-            <th>Threads</th>
-            <th>Posts</th>
-            <th>Last Post</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>
-                    <a href="{% url 'category_threads' category.pk %}">{{ category.category_name }}</a>
-                    <small class="text-muted d-block">{{ category.description }}</small>
-                </td>
-                <td class="align-middle">
-                    {{ category.threads.count }}
-                </td>
-                <td class="align-middle">
-                    {{ category.get_post_count }}
-                </td>
-                <td class="align-middle">
-                    {% with post=category.get_last_post %}
-                        {% if post %}
-                            <small>
-                                <a href="{% url 'thread_posts' category.pk post.forum_thread.pk %}">
-                                    By {{ post.owner.username }} at {{ post.creation_date }}
-                                </a>
-                            </small>
-                        {% else %}
-                            <small class="text-muted">
-                                <em>No posts</em>
-                            </small>
-                        {% endif %}
-                    {% endwith %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+    {% for category in categories %}
+        <div class="container">
+            <div class="card">
+                <div class="row justify-content-between">
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{% url 'category_threads' category.pk %}">{{ category.category_name }}</a>
+                            </h4>
+                            <p class="card-text">{{ category.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-md-right">
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <small class="text-muted">
+                                        <span>{{ category.threads.count }}</span>
+                                        <span> threads</span>
+                                    </small>
+                                </li>
+                                <li>
+                                    <small class="text-muted">
+                                        <span>{{ category.get_post_count }}</span>
+                                        <span> posts</span>
+                                    </small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 text-md-left">
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                {% with post=category.get_last_post %}
+                                    {% if post %}
+                                        <li>
+                                            <small class="text-muted">
+                                                <span><a
+                                                        href="{% url 'thread_posts' category.pk post.forum_thread.pk %}">
+                                                    {{ post.forum_thread.thread_name }}</a>
+                                                    </span>
+                                            </small>
+                                        </li>
+                                        <li>
+                                            <small class="text-muted">
+                                                <span>last update</span>
+                                            </small>
+                                        </li>
+                                    {% else %}
+                                        <small class="text-muted">
+                                            <em>No posts</em>
+                                        </small>
+                                    {% endif %}
+                                {% endwith %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p></p>
+    {% endfor %}
+
 {% endblock %}
